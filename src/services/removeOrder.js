@@ -1,9 +1,9 @@
 import axios from "axios";
-import { backendURLOrder } from "../api";
+import { backendURL } from "../api";
 
 const removeOrder = async (id) => {
   try {
-    const response = await axios.delete(`${backendURLOrder}${id} `, {
+    const response = await axios.delete(`${backendURL}/api/order/${id} `, {
       headers: { "Content-Type": "application/json" },
     });
     console.log(response);

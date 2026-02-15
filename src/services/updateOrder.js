@@ -1,11 +1,11 @@
 import axios from "axios";
-import { backendURLOrder } from "../api";
+import { backendURL } from "../api";
 
 const updateOrderStatus = async (id, status) => {
   console.log("id in frontend", id);
   try {
     const response = await axios.put(
-      `${backendURLOrder}update/${id}`,
+      `${backendURL}/api/order/update/${id}`,
       { status },
       { headers: { "Content-Type": "application/json" } },
     );

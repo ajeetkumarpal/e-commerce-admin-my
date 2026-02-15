@@ -1,11 +1,11 @@
 import axios from "axios";
-import { backendURLProduct } from "../api";
+import { backendURL } from "../api";
 
 const addProduct = async (productData) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");    
 
   try {
-    const response = await axios.post(backendURLProduct + "add", productData, {
+    const response = await axios.post(`${backendURL}/api/product/add`, productData, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,

@@ -1,12 +1,12 @@
 import axios from "axios";
-import { backendURLProduct } from "../api";
+import { backendURL } from "../api";
 
 const removeProduct = async (id) => {
   const token = localStorage.getItem("token");
 
   try {
-    console.log(`${backendURLProduct}remove/${id}`);
-    const response = await axios.delete(`${backendURLProduct}remove/${id}`, {
+    
+    const response = await axios.delete(`${backendURL}/api/product/remove/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

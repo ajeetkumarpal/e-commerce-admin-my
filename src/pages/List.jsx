@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { products } from "../../../frontend/src/assets/frontend_assets/assets";
+import { products } from "../assets/frontend_assets/assets";
 import axios from "axios";
 import removeProduct from "../services/removeProduct";
 import { toast } from "react-toastify";
+import { backendURL } from "../api";
 
 const List = () => {
   const [allProduct, setAllProduct] = useState([]);
   
   useEffect(() => {
-    const fetchFromBackend = async () => {
+    const fetchFromBackend = async () => {   
       try {
-        const response = await axios.get("http://localhost:3000/api/product/list");
+        const response = await axios.get(`${backendURL}/api/product/list`);
         const backendProducts = response.data.data; 
 
         if (!Array.isArray(backendProducts)) {

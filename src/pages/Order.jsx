@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { assets } from "../assets/admin_assets/assets";
-
+import { backendURL } from "../api";
 import removeOrder from "../services/removeOrder";
 import updateOrderStatus from "../services/updateOrder";
 
@@ -13,8 +13,8 @@ const Order = () => {
   
   const fetchOrders = async () => {
     try {
-      setLoading(true);
-      const res = await axios.get("http://localhost:3000/api/order/list");
+      setLoading(true);      
+      const res = await axios.get(`${backendURL}/api/order/list`);
 
       if (res.data.success) {
         
