@@ -8,6 +8,8 @@ const Login = ({ setToken }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    console.log("BUTTON CLICKED");
+
 
     try {
       const result = await adminLogin({
