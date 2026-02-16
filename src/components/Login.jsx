@@ -32,7 +32,7 @@ const Login = ({ setToken }) => {
   return (
     <form
       onSubmit={submitHandler}
-      className="flex flex-col my-32 mx-auto w-1/4 bg-green-100 border border-gray-400 px-8 py-8 rounded-sm"
+      className="flex flex-col my-32 mx-auto w-1/4 bg-blue-300 border border-gray-400 px-8 py-8 rounded-sm"
     >
       <h1 className="font-bold mb-6 mt-3 text-xl">Admin Panel</h1>
 
