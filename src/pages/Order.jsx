@@ -34,7 +34,6 @@ const Order = () => {
   const handleRemove = async (id) => {
     try {
       const res = await removeOrder(id);
-
       if (res.data.success) {
         setOrders((prev) => prev.filter((order) => order._id !== id));
         toast.success(res.data.message);
@@ -47,14 +46,12 @@ const Order = () => {
   const handleStatusChange = async (id, newStatus) => {
     try {
       const res = await updateOrderStatus(id, newStatus);
-
       if (res.data.success) {
         setOrders((prev) =>
           prev.map((order) =>
             order._id === id ? { ...order, deliveryStatus: newStatus } : order
           )
         );
-
         toast.success(res.data.message);
       }
     } catch (error) {
@@ -90,8 +87,11 @@ const Order = () => {
             Delete
           </button>
 
-          <div className="flex items-start justify-between gap-5 mb-4">
-            <div className="flex items-start gap-5 flex-1">
+          {/* ✅ FIXED GRID FOR PERFECT ALIGNMENT */}
+          <div className="grid grid-cols-[2fr_220px_1fr] items-start gap-6 mb-4">
+            
+            {/* LEFT SECTION */}
+            <div className="flex items-start gap-5">
               <img
                 src={assets.parcel_icon}
                 alt=""
@@ -117,14 +117,14 @@ const Order = () => {
               </div>
             </div>
 
-            {/* CENTERED SELECT */}
-            <div className="flex items-center justify-center flex-1">
+            {/* ✅ CENTER FIXED WIDTH SELECT */}
+            <div className="flex justify-center">
               <select
                 value={orderItem.deliveryStatus || "Pending"}
                 onChange={(e) =>
                   handleStatusChange(orderItem._id, e.target.value)
                 }
-                className="p-2 w-40 bg-gray-700 text-white font-semibold text-sm border rounded-sm border-gray-400 text-center"
+                className="p-2 w-44 bg-gray-700 text-white font-semibold text-sm border rounded-sm border-gray-400"
               >
                 <option value="Pending">Pending</option>
                 <option value="Shipped">Shipped</option>
@@ -135,25 +135,27 @@ const Order = () => {
               </select>
             </div>
 
+            {/* RIGHT SECTION */}
             <div className="text-right flex flex-col items-end gap-2">
               <p className="text-sm text-gray-600">
                 {new Date(orderItem.createdAt).toLocaleDateString("en-IN")}
               </p>
 
-              <span className="px-4 min-w-20 text-center py-2 text-sm font-bold text-green-700 bg-green-200 border border-green-300 rounded-full">
+              <span className="px-4 min-w-24 text-center py-2 text-sm font-bold text-green-700 bg-green-200 border border-green-300 rounded-full">
                 {orderItem.paymentMethod} - ₹ {orderItem.payment}
               </span>
             </div>
           </div>
 
+          {/* ✅ CART ITEMS FIXED ALIGNMENT */}
           <div className="space-y-3 mt-4">
             {orderItem.cartItems.map((data) => (
               <div
                 key={data._id}
-                className="flex items-center border border-gray-100 rounded-lg p-4 bg-gray-50"
+                className="grid grid-cols-[2fr_120px_180px] items-center border border-gray-100 rounded-lg p-4 bg-gray-50"
               >
                 {/* Product */}
-                <div className="flex-1">
+                <div>
                   <p className="font-medium text-gray-800">
                     {data.name}
                     <span className="text-center font-bold border mx-4 bg-black text-amber-300 px-4 py-2 border-y-amber-300 rounded-full">
@@ -163,12 +165,12 @@ const Order = () => {
                 </div>
 
                 {/* Qty */}
-                <div className="w-32 text-center text-sm text-gray-600">
+                <div className="text-center text-sm text-gray-600">
                   Qty: {data.quantity}
                 </div>
 
-                {/* Payment moved to END */}
-                <div className="flex-1 text-right font-bold text-orange-600">
+                {/* Payment aligned */}
+                <div className="text-right font-bold text-orange-600">
                   Payment :{" "}
                   {orderItem.paymentMethod === "razorpay"
                     ? "success"
