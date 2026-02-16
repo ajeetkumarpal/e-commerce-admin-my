@@ -21,7 +21,7 @@ const Order = () => {
         toast.error("Failed to fetch orders");
       }
     } catch (error) {
-      toast.error("Something went wrong", error);
+      toast.error("Something went wrong",error);
     } finally {
       setLoading(false);
     }
@@ -40,10 +40,9 @@ const Order = () => {
         toast.success(res.data.message);
       }
     } catch (error) {
-      toast.error("Delete failed", error);
+      toast.error("Delete failed",error);
     }
   };
-  console.log("order admin", orders);
 
   const handleStatusChange = async (id, newStatus) => {
     try {
@@ -52,14 +51,14 @@ const Order = () => {
       if (res.data.success) {
         setOrders((prev) =>
           prev.map((order) =>
-            order._id === id ? { ...order, deliveryStatus: newStatus } : order,
-          ),
+            order._id === id ? { ...order, deliveryStatus: newStatus } : order
+          )
         );
 
         toast.success(res.data.message);
       }
     } catch (error) {
-      toast.error("Status update failed", error);
+      toast.error("Status update failed",error);
     }
   };
 
@@ -76,8 +75,8 @@ const Order = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto pt-6 pb-18 space-y-8 ">
-      <h1 className="text-3xl font-semibold"> Total Order Detail</h1>
+    <div className="max-w-6xl mx-auto pt-6 pb-18 space-y-8">
+      <h1 className="text-3xl font-semibold">Total Order Detail</h1>
 
       {orders.map((orderItem) => (
         <div
@@ -92,7 +91,7 @@ const Order = () => {
           </button>
 
           <div className="flex items-start justify-between gap-5 mb-4">
-            <div className="flex  items-start gap-5 flex-1">
+            <div className="flex items-start gap-5 flex-1">
               <img
                 src={assets.parcel_icon}
                 alt=""
@@ -117,13 +116,15 @@ const Order = () => {
                 </p>
               </div>
             </div>
-            <div>
+
+            {/* CENTERED SELECT */}
+            <div className="flex items-center justify-center flex-1">
               <select
                 value={orderItem.deliveryStatus || "Pending"}
                 onChange={(e) =>
                   handleStatusChange(orderItem._id, e.target.value)
                 }
-                className="p-2 w-40 bg-gray-700 text-white font-semibold text-sm border rounded-sm border-gray-400"
+                className="p-2 w-40 bg-gray-700 text-white font-semibold text-sm border rounded-sm border-gray-400 text-center"
               >
                 <option value="Pending">Pending</option>
                 <option value="Shipped">Shipped</option>
@@ -149,25 +150,30 @@ const Order = () => {
             {orderItem.cartItems.map((data) => (
               <div
                 key={data._id}
-                className="grid grid-cols-[2fr_1fr_1fr_1fr] items-center border border-gray-100 rounded-lg p-4 bg-gray-50"
+                className="flex items-center border border-gray-100 rounded-lg p-4 bg-gray-50"
               >
-                <p className="font-medium text-gray-800">
-                  {data.name}
-                  <span className="text-center font-bold border mx-4 bg-black text-amber-300 px-4 py-2 border-y-amber-300 rounded-full">
-                    {data.size}
-                  </span>
-                </p>
+                {/* Product */}
+                <div className="flex-1">
+                  <p className="font-medium text-gray-800">
+                    {data.name}
+                    <span className="text-center font-bold border mx-4 bg-black text-amber-300 px-4 py-2 border-y-amber-300 rounded-full">
+                      {data.size}
+                    </span>
+                  </p>
+                </div>
 
-                <p className="text-sm text-gray-600 text-center">
+                {/* Qty */}
+                <div className="w-32 text-center text-sm text-gray-600">
                   Qty: {data.quantity}
-                </p>
+                </div>
 
-                <p className="font-bold text-orange-600 text-right">
+                {/* Payment moved to END */}
+                <div className="flex-1 text-right font-bold text-orange-600">
                   Payment :{" "}
                   {orderItem.paymentMethod === "razorpay"
                     ? "success"
                     : "pending"}
-                </p>
+                </div>
               </div>
             ))}
           </div>
