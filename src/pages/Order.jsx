@@ -92,7 +92,7 @@ const Order = () => {
           </button>
 
           <div className="flex items-start justify-between gap-5 mb-4">
-            <div className="flex justify-between items-start gap-5 flex-1">
+            <div className="flex  items-start gap-5 flex-1">
               <img
                 src={assets.parcel_icon}
                 alt=""
@@ -117,20 +117,22 @@ const Order = () => {
                 </p>
               </div>
             </div>
-            <select
-              value={orderItem.deliveryStatus || "Pending"}
-              onChange={(e) =>
-                handleStatusChange(orderItem._id, e.target.value)
-              }
-              className="p-2 w-40 bg-gray-700 text-white font-semibold text-sm border rounded-sm border-gray-400"
-            >
-              <option value="Pending">Pending</option>
-              <option value="Shipped">Shipped</option>
-              <option value="Out for Delivery">Out for Delivery</option>
-              <option value="Delivered">Delivered</option>
-              <option value="Cancelled">Cancelled</option>
-              <option value="Refunded">Refunded</option>
-            </select>
+            <div>
+              <select
+                value={orderItem.deliveryStatus || "Pending"}
+                onChange={(e) =>
+                  handleStatusChange(orderItem._id, e.target.value)
+                }
+                className="p-2 w-40 bg-gray-700 text-white font-semibold text-sm border rounded-sm border-gray-400"
+              >
+                <option value="Pending">Pending</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Out for Delivery">Out for Delivery</option>
+                <option value="Delivered">Delivered</option>
+                <option value="Cancelled">Cancelled</option>
+                <option value="Refunded">Refunded</option>
+              </select>
+            </div>
 
             <div className="text-right flex flex-col items-end gap-2">
               <p className="text-sm text-gray-600">
