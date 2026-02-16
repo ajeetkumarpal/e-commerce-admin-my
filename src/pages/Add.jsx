@@ -40,6 +40,12 @@ const Add = () => {
       if (image3File) formData.append("image3", image3File);
       if (image4File) formData.append("image4", image4File);
 
+      console.log("formData",formData);
+      for (let pair of formData.entries()) {
+  console.log(pair[0], pair[1]); // ye show karega ki FormData me kya hai
+}
+
+
       const result = await addProduct(formData);
       
 
