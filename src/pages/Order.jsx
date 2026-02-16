@@ -128,6 +128,20 @@ console.log("order admin",orders)
                 </p>
               </div>
             </div>
+               <select
+                  value={orderItem.deliveryStatus || "Pending"}
+                  onChange={(e) =>
+                    handleStatusChange(orderItem._id, e.target.value)
+                  }
+                  className="p-2 w-40 bg-gray-700 text-white font-semibold text-sm border rounded-sm border-gray-400"
+                >
+                  <option value="Pending">Pending</option>
+                  <option value="Shipped">Shipped</option>
+                  <option value="Out for Delivery">Out for Delivery</option>
+                  <option value="Delivered">Delivered</option>
+                  <option value="Cancelled">Cancelled</option>
+                  <option value="Refunded">Refunded</option>
+                </select>
 
             <div className="text-right flex flex-col items-end gap-2">
 
@@ -163,20 +177,7 @@ console.log("order admin",orders)
                 </p>
 
                
-                <select
-                  value={orderItem.deliveryStatus || "Pending"}
-                  onChange={(e) =>
-                    handleStatusChange(orderItem._id, e.target.value)
-                  }
-                  className="p-2 w-40 bg-gray-700 text-white font-semibold text-sm border rounded-sm border-gray-400"
-                >
-                  <option value="Pending">Pending</option>
-                  <option value="Shipped">Shipped</option>
-                  <option value="Out for Delivery">Out for Delivery</option>
-                  <option value="Delivered">Delivered</option>
-                  <option value="Cancelled">Cancelled</option>
-                  <option value="Refunded">Refunded</option>
-                </select>
+             
 
                 <p className="font-bold text-orange-600 text-right">
                   Payment : {orderItem.paymentMethod === "razorpay" ? "success" : "pending"}
