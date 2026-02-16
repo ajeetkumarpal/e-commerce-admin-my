@@ -14,9 +14,9 @@ try {
     const formData = new FormData();
     formData.append("email", email);
     formData.append("password", password);
-
+console.log("clicked before");
     const result = await adminLogin(formData);
-    
+    console.log("clicked after")
    
     if (result.data.success) {
       toast.success(result.data.message);
