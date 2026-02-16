@@ -2,32 +2,29 @@ import React, { useState } from "react";
 import adminLogin from "../services/adminLogin";
 import { toast } from "react-toastify";
 
-const Login = ({setToken}) => {
+const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const submitHandler = async (e) => {
-try {
-      e.preventDefault();
-      console.log("clicked")
+    e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("password", password);
-console.log("clicked before");
-    const result = await adminLogin(formData);
-    console.log("clicked after")
-   
-    if (result.data.success) {
-      toast.success(result.data.message);
-      setToken(result.data.token);
+    try {
+      const result = await adminLogin({
+        email,
+        password,
+      });
 
-    } else {
-      toast.error(result.data.message);
+      if (result.data.success) {
+        toast.success(result.data.message);
+        setToken(result.data.token);
+      } else {
+        toast.error(result.data.message);
+      }
+    } catch (error) {
+      console.log(error.response?.data || error.message);
+      toast.error("Something went wrong");
     }
-} catch (error) {
-  console.log(error.response);
-}
   };
 
   return (
@@ -37,30 +34,30 @@ console.log("clicked before");
     >
       <h1 className="font-bold mb-6 mt-3 text-xl">Admin Panel</h1>
 
-      <label className="font-semibold " htmlFor="myemail">
+      <label className="font-semibold" htmlFor="myemail">
         Email
       </label>
       <input
         className="px-2 py-2 mb-2 bg-white border border-gray-400 rounded-sm"
         type="email"
         placeholder="your@gmail.com"
-        name="email"
         id="myemail"
         onChange={(e) => setEmail(e.target.value)}
         value={email}
       />
+
       <label className="font-semibold" htmlFor="myPassword">
         Password
       </label>
       <input
         type="password"
         id="myPassword"
-        name="password"
         placeholder="enter your password"
         className="px-2 py-2 mb-2 bg-white border border-gray-400 rounded-sm"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
+
       <button
         type="submit"
         className="w-full bg-gray-800 text-white h-10 font-semibold text-sm my-4 border rounded-sm"
